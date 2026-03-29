@@ -2,7 +2,7 @@ import { env } from "./env";
 import { db } from "./db/client";
 import { createApp } from "./app";
 
-const app = createApp(db);
+const app = createApp({ db, apiToken: env.GYO_API_TOKEN });
 
 Bun.serve({
   port: env.PORT,

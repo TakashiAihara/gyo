@@ -6,5 +6,6 @@ function requireEnv(name: string): string {
 
 export const env = {
   DATABASE_URL: requireEnv("DATABASE_URL"),
+  GYO_API_TOKEN: requireEnv("GYO_API_TOKEN"),
   PORT: Number(process.env.PORT ?? 8080),
 };

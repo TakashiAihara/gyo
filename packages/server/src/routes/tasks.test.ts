@@ -19,7 +19,7 @@ beforeAll(async () => {
     email: "test@example.com",
     display_name: "Test User",
   });
-  app = createApp(db);
+  app = createApp({ db });
 });
 
 async function post(path: string, body: unknown) {
