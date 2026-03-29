@@ -1,0 +1,12 @@
+{
+  "name": "gyo",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build:cli": "bun build packages/cli/src/index.ts --compile --outfile=dist/gyo",
+    "build:server": "bun build packages/server/src/index.ts --target=bun --outfile=dist/server",
+    "dev:cli": "bun run packages/cli/src/index.ts",
+    "dev:server": "bun run packages/server/src/index.ts",
+    "typecheck": "tsc --noEmit"
+  }
+}

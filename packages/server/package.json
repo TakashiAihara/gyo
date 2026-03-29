@@ -1,0 +1,7 @@
+{
+  "name": "@gyo/server",
+  "private": true,
+  "dependencies": {
+    "@gyo/shared": "workspace:*"
+  }
+}

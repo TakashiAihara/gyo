@@ -1,0 +1,10 @@
+{
+  "name": "@gyo/cli",
+  "private": true,
+  "bin": {
+    "gyo": "src/index.ts"
+  },
+  "dependencies": {
+    "@gyo/shared": "workspace:*"
+  }
+}
