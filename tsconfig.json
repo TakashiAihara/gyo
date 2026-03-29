@@ -6,8 +6,15 @@
     "strict": true,
     "skipLibCheck": true,
     "paths": {
-      "@gyo/shared": ["./packages/shared/src/index.ts"]
+      "@gyo/shared": ["./packages/shared/src/index.ts"],
+      "@gyo/server": ["./packages/server/src/app.ts"],
+      "@gyo/server/*": ["./packages/server/src/*"]
     }
   },
-  "include": ["packages/*/src/**/*"]
+  "include": ["packages/shared/src/**/*"],
+  "references": [
+    { "path": "./packages/server" },
+    { "path": "./packages/cli" },
+    { "path": "./packages/shared" }
+  ]
 }

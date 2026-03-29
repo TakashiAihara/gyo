@@ -1,7 +1,26 @@
 {
   "name": "@gyo/server",
   "private": true,
+  "scripts": {
+    "dev": "bun run src/index.ts",
+    "build": "bun build src/index.ts --target=bun --outfile ../../dist/server",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint src",
+    "test": "vitest run"
+  },
   "dependencies": {
-    "@gyo/shared": "workspace:*"
+    "@electric-sql/pglite": "^0.4.2",
+    "@gyo/shared": "workspace:*",
+    "@hono/zod-validator": "^0.7.6",
+    "@neondatabase/serverless": "^1.0.2",
+    "drizzle-orm": "^0.45.2",
+    "hono": "^4.12.9",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.11",
+    "drizzle-kit": "^0.31.10",
+    "oxlint": "^1.57.0",
+    "vitest": "^4.1.2"
   }
 }

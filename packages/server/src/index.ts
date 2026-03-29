@@ -1,11 +1,12 @@
-const PORT = Number(process.env.PORT ?? 8080);
+import { env } from "./env";
+import { db } from "./db/client";
+import { createApp } from "./app";
+
+const app = createApp(db);
 
 Bun.serve({
-  port: PORT,
-  fetch(req) {
-    const url = new URL(req.url);
-    return new Response(`gyo server: ${url.pathname}`, { status: 404 });
-  },
+  port: env.PORT,
+  fetch: app.fetch,
 });
 
-console.log(`gyo server listening on :${PORT}`);
+console.log(`gyo server listening on :${env.PORT}`);
