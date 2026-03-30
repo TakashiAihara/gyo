@@ -76,10 +76,10 @@ if [[ -z "$ENV_NAME" || ! "$ENV_NAME" =~ ^[A-Za-z0-9_-]+$ ]]; then
 fi
 
 if [[ -z "$VARS_FILE" ]]; then
-  VARS_FILE="${ROOT_DIR}/.env.${ENV_NAME}"
+  VARS_FILE="${ROOT_DIR}/scripts/env.${ENV_NAME}"
 fi
 if [[ -z "$SECRETS_FILE" ]]; then
-  SECRETS_FILE="${ROOT_DIR}/.env.${ENV_NAME}.secrets"
+  SECRETS_FILE="${ROOT_DIR}/scripts/env.${ENV_NAME}.secrets"
 fi
 if [[ -z "$TFVARS_FILE" ]]; then
   TFVARS_FILE="${ROOT_DIR}/infra/environments/${ENV_NAME}/terraform.tfvars"

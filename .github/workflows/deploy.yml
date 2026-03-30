@@ -46,6 +46,7 @@ jobs:
             --allow-unauthenticated \
             --service-account ${{ vars.SERVICE_ACCOUNT_EMAIL }} \
             --port 8080 \
+            --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }},GYO_API_TOKEN=${{ secrets.GYO_API_TOKEN }}" \
             --min-instances 1 \
             --max-instances 10 \
             --memory 512Mi
