@@ -5,3 +5,4 @@ dist
 *.md
 docs
 packages/cli
+!packages/cli/package.json
