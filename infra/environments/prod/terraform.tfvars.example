@@ -1,0 +1,14 @@
+# GCP Configuration
+gcp_project_id = "gyo-prod"
+gcp_region     = "asia-northeast1"
+
+# Neon Configuration
+# Get this from https://console.neon.tech/ → Account Settings → API Keys
+neon_api_key = "napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# Application Configuration
+environment = "prod"
+app_name    = "gyo"
+
+# GitHub Integration
+github_repo = "TakashiAihara/gyo"

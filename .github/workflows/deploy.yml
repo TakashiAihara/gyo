@@ -3,12 +3,14 @@ name: Deploy to Cloud Run
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 env:
   PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
   REGION: ${{ vars.GCP_REGION }}
-  SERVICE: gyo-server
-  REGISTRY: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/gyo
+  SERVICE: ${{ vars.CLOUD_RUN_SERVICE_NAME }}
+  ARTIFACT_REGISTRY_URL: ${{ vars.ARTIFACT_REGISTRY_URL }}
+  IMAGE: ${{ vars.ARTIFACT_REGISTRY_URL }}/gyo-server:${{ github.sha }}
 
 jobs:
   deploy:
@@ -22,8 +24,8 @@ jobs:
 
       - uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
-          service_account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.SERVICE_ACCOUNT_EMAIL }}
 
       - uses: google-github-actions/setup-gcloud@v2
 
@@ -32,18 +34,18 @@ jobs:
 
       - name: Build and push
         run: |
-          docker build -t ${{ env.REGISTRY }}/${{ env.SERVICE }}:${{ github.sha }} .
-          docker push ${{ env.REGISTRY }}/${{ env.SERVICE }}:${{ github.sha }}
+          docker build -t ${{ env.IMAGE }} .
+          docker push ${{ env.IMAGE }}
 
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy ${{ env.SERVICE }} \
-            --image ${{ env.REGISTRY }}/${{ env.SERVICE }}:${{ github.sha }} \
+            --image ${{ env.IMAGE }} \
             --region ${{ env.REGION }} \
             --platform managed \
             --allow-unauthenticated \
-            --set-env-vars "DATABASE_URL=${{ secrets.DATABASE_URL }},GYO_API_TOKEN=${{ secrets.GYO_API_TOKEN }}" \
+            --service-account ${{ vars.SERVICE_ACCOUNT_EMAIL }} \
             --port 8080 \
-            --min-instances 0 \
-            --max-instances 1 \
-            --memory 256Mi
+            --min-instances 1 \
+            --max-instances 10 \
+            --memory 512Mi

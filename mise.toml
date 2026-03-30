@@ -1,2 +1,5 @@
 [tools]
 bun = "1.3"
+gcloud = "latest"
+opentofu = "1.9"
+"aqua:neondatabase/neonctl" = "latest"
