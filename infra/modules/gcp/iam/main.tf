@@ -45,3 +45,17 @@ resource "google_project_iam_member" "artifactregistry" {
   role    = "roles/artifactregistry.writer"
   member  = "serviceAccount:${google_service_account.cloudrun.email}"
 }
+
+# Cloud Run admin role (deploy, update, delete services)
+resource "google_project_iam_member" "cloudrun_admin" {
+  project = var.gcp_project_id
+  role    = "roles/run.admin"
+  member  = "serviceAccount:${google_service_account.cloudrun.email}"
+}
+
+# Allow SA to act as itself for Cloud Run service identity
+resource "google_service_account_iam_member" "cloudrun_sa_user" {
+  service_account_id = google_service_account.cloudrun.name
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.cloudrun.email}"
+}

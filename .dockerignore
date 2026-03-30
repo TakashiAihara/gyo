@@ -4,5 +4,3 @@ dist
 .env
 *.md
 docs
-packages/cli
-!packages/cli/package.json
