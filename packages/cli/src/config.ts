@@ -11,7 +11,7 @@ const configPath = join(configDir, "config.json");
 
 export function readConfig(): Config {
   if (!existsSync(configPath)) {
-    return { api_url: process.env.GYO_API_URL ?? "http://localhost:8080" };
+    return { api_url: process.env.GYO_API_URL ?? "https://gyo-server-vhpbnetmna-an.a.run.app" };
   }
   return JSON.parse(readFileSync(configPath, "utf-8")) as Config;
 }
